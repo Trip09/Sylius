@@ -513,8 +513,8 @@ class WebContext extends DefaultContext
     public function iShouldSeeFieldError($field)
     {
         $this->assertSession()->elementExists('xpath', sprintf(
-            "//div[contains(@class, 'error')]//label[text()[contains(., '%s')]]", ucfirst($field)
-        ));
+                "//div[contains(@class, 'error')]//label[text()[contains(., '%s')]]", ucfirst($field)
+            ));
     }
 
     /**
@@ -829,6 +829,6 @@ class WebContext extends DefaultContext
      */
     protected function assertStatusCodeEquals($code)
     {
-        $this->assertSession()->statusCodeEquals($code);
+        $this->assertSession()->statusCodeEquals($code        $this->assertSession()->statusCodeEquals($code);
     }
 }
