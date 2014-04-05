@@ -20,7 +20,7 @@ framework:
 jms_i18n_routing:
     default_locale: %sylius.locale%
     locales: %sylius.locales%
-    strategy: prefix_except_default
+    strategy: %sylius.locale.strategy%
 
 twig:
     form:
