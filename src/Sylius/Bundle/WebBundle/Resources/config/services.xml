@@ -20,6 +20,8 @@
 
         <parameter key="sylius.form.frontend.profile.type.class">Sylius\Bundle\WebBundle\Form\ProfileFormType</parameter>
         <parameter key="sylius.form.frontend.registration.type.class">Sylius\Bundle\CoreBundle\Form\Type\RegistrationFormType</parameter>
+
+        <parameter key="sylius.listener.locale.class">Sylius\Bundle\WebBundle\EventListener\LocaleListener</parameter>
     </parameters>
 
     <services>
@@ -128,6 +130,11 @@
         <service id="sylius.user.registration.form.type" class="%sylius.form.frontend.registration.type.class%">
             <tag name="form.type" alias="sylius_user_registration" />
             <argument>%fos_user.model.user.class%</argument>
+        </service>
+        
+        <service id="sylius.listener.locale" class="%sylius.listener.locale.class%">
+            <tag name="kernel.event_subscriber"/>
+            <argument type="string">%kernel.default_locale%</argument>
         </service>
     </services>
 

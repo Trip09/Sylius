@@ -17,10 +17,16 @@ framework:
     trusted_proxies: ~
     session:         ~
 
+jms_translation:
+    configs:
+        app:
+            output_dir: %kernel.root_dir%/Resources/translations
+
 jms_i18n_routing:
     default_locale: %sylius.locale%
     locales: %sylius.locales%
     strategy: %sylius.locale.strategy%
+    catalogue: routes
 
 twig:
     form:
