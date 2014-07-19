@@ -22,7 +22,7 @@ security:
                 use_referer:  true
             logout:
                 path:   sylius_backend_security_logout
-                target: /
+                target: sylius_backend_security_login
             anonymous: true
 
         oauth_token:
@@ -77,8 +77,8 @@ security:
         - { path: "^[/[a-z]]{3}?/register", role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "^[/[a-z]]{3}?/resetting", role: IS_AUTHENTICATED_ANONYMOUSLY }
 
-        - { path: /administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: /administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/administration/login, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/administration/login-check, role: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: "/administration.*", role: ROLE_SYLIUS_ADMIN }
 
         - { path: "/account.*", role: ROLE_USER }
