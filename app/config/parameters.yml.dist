@@ -15,6 +15,7 @@ parameters:
 
     sylius.locale:                    en
     sylius.locales:                   [%sylius.locale%, de, pl]
+    sylius.locale.strategy:           custom
     sylius.secret:                    abc
 
     sylius.currency:                  EUR

@@ -24,16 +24,16 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class LocaleListener implements EventSubscriberInterface
 {
     /**
-     * @var LocaleContextInterface
+     * @var string
      */
-    protected $localeContext;
+    protected $defaultLocale;
 
     /**
-     * @param LocaleContextInterface $localeContext
+     * @param string $defaultLocale
      */
-    public function __construct(LocaleContextInterface $localeContext)
+    public function __construct($defaultLocale)
     {
-        $this->localeContext = $localeContext;
+        $this->defaultLocale = $defaultLocale;
     }
 
     /**
@@ -49,7 +49,13 @@ class LocaleListener implements EventSubscriberInterface
             return;
         }
 
-        $request->setLocale($this->localeContext->getLocale() ?: $this->localeContext->getDefaultLocale());
+        // try to see if the locale has been set as a _locale routing parameter
+        if ($locale = $request->attributes->get('_locale')) {
+            $request->getSession()->set('_locale', $locale);
+        } else {
+            // if no explicit locale has been set on this request, use one from the session
+            $request->setLocale($request->getSession()->get('_locale', $this->defaultLocale));
+        }
     }
 
     public static function getSubscribedEvents()

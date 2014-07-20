@@ -513,8 +513,8 @@ class WebContext extends DefaultContext
     public function iShouldSeeFieldError($field)
     {
         $this->assertSession()->elementExists('xpath', sprintf(
-                "//div[contains(@class, 'error')]//label[text()[contains(., '%s')]]", ucfirst($field)
-            ));
+            "//div[contains(@class, 'error')]//label[text()[contains(., '%s')]]", ucfirst($field)
+        ));
     }
 
     /**
@@ -575,13 +575,13 @@ class WebContext extends DefaultContext
         switch ($name) {
             case 'English':
                 $text = 'Welcome to Sylius';
-                break;
+            break;
             case 'Polish':
                 $text = 'Witaj w Sylius';
-                break;
+            break;
             case 'German':
                 $text = 'Willkommen bei Sylius';
-                break;
+            break;
         }
 
         $this->assertSession()->pageTextContains($text);

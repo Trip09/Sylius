@@ -60,13 +60,6 @@ class FrontendMenuBuilder extends MenuBuilder
     protected $moneyExtension;
 
     /**
-     * Supported locales.
-     *
-     * @var array
-     */
-    protected $locales;
-
-    /**
      * Constructor.
      *
      * @param FactoryInterface          $factory
@@ -77,19 +70,16 @@ class FrontendMenuBuilder extends MenuBuilder
      * @param RepositoryInterface       $taxonomyRepository
      * @param CartProviderInterface     $cartProvider
      * @param MoneyExtension            $moneyExtension
-     * @param array                    $locales
      */
     public function __construct(
-        FactoryInterface         $factory,
-        SecurityContextInterface $securityContext,
-        TranslatorInterface      $translator,
-        EventDispatcherInterface $eventDispatcher,
-        RepositoryInterface      $exchangeRateRepository,
-        RepositoryInterface      $taxonomyRepository,
-        CartProviderInterface    $cartProvider,
-        MoneyExtension           $moneyExtension,
-        array                    $locales
-
+        FactoryInterface          $factory,
+        SecurityContextInterface  $securityContext,
+        TranslatorInterface       $translator,
+        EventDispatcherInterface  $eventDispatcher,
+        CurrencyProviderInterface $currencyProvider,
+        RepositoryInterface       $taxonomyRepository,
+        CartProviderInterface     $cartProvider,
+        MoneyExtension            $moneyExtension
     )
     {
         parent::__construct($factory, $securityContext, $translator, $eventDispatcher);
@@ -98,7 +88,6 @@ class FrontendMenuBuilder extends MenuBuilder
         $this->taxonomyRepository = $taxonomyRepository;
         $this->cartProvider = $cartProvider;
         $this->moneyExtension = $moneyExtension;
-        $this->locales = $locales;
     }
 
     /**
@@ -269,29 +258,6 @@ class FrontendMenuBuilder extends MenuBuilder
         }
     }
 
-    /**
-     * Builds frontend locale menu.
-     *
-     * @return ItemInterface
-     */
-    public function createLocaleMenu()
-    {
-        $menu = $this->factory->createItem('root', array(
-                'childrenAttributes' => array(
-                    'class' => 'nav nav-pills'
-                )
-            ));
-
-        foreach ($this->locales as $locale) {
-            $menu->addChild($locale, array(
-                    'route' => 'sylius_homepage',
-                    'routeParameters' => array('_locale' => $locale)
-                ))->setLabel(Intl::getLanguageBundle()->getLanguageName($locale));
-        }
-
-        return $menu;
-    }
-    
     /**
      * Builds frontend social menu.
      *

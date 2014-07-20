@@ -63,7 +63,6 @@
             <argument type="service" id="sylius.repository.taxonomy" />
             <argument type="service" id="sylius.cart_provider" />
             <argument type="service" id="sylius.twig.extension.money" />
-            <argument>%sylius.locales%</argument>
             <call method="setRequest">
                 <argument type="service" id="request" on-invalid="null" strict="false" />
             </call>
