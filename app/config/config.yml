@@ -2,6 +2,7 @@ imports:
     - { resource: parameters.yml }
     - { resource: security.yml }
     - { resource: @SyliusCoreBundle/Resources/config/app/main.yml }
+    - { resource: @SyliusCandibambuProductBundle/Resources/config/bundle.yml }
 
 framework:
     translator:      { fallback: %sylius.locale% }
@@ -54,6 +55,9 @@ doctrine:
                 filters:
                     softdeleteable:
                         class: Gedmo\SoftDeleteable\Filter\SoftDeleteableFilter
+                        enabled: true
+                    oneLocale:
+                        class: A2lix\I18nDoctrineBundle\Doctrine\ORM\Filter\OneLocaleFilter
                         enabled: true
 
 doctrine_phpcr:

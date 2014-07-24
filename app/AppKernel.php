@@ -24,7 +24,10 @@ class AppKernel extends Kernel
     public function registerBundles()
     {
         $bundles = array(
-            // Put here your own bundles!
+            new \A2lix\I18nDoctrineBundle\A2lixI18nDoctrineBundle(),
+            new \A2lix\TranslationFormBundle\A2lixTranslationFormBundle(),
+            new \Sylius\Candibambu\ProductBundle\SyliusCandibambuProductBundle(),
+
         );
 
         return array_merge(parent::registerBundles(), $bundles);

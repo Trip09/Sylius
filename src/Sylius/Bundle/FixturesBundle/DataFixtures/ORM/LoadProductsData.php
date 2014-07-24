@@ -85,10 +85,9 @@ class LoadProductsData extends DataFixture
     protected function createTShirt($i)
     {
         $product = $this->createProduct();
+        $product->addTranslation($this->createProductTranslation('T-Shirt "%s"', $i));
+
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
-        $product->setName(sprintf('T-Shirt "%s"', $this->faker->word));
-        $product->setDescription($this->faker->paragraph);
-        $product->setShortDescription($this->faker->sentence);
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
@@ -127,11 +126,9 @@ class LoadProductsData extends DataFixture
     protected function createSticker($i)
     {
         $product = $this->createProduct();
+        $product->addTranslation($this->createProductTranslation('Sticker "%s"', $i));
 
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
-        $product->setName(sprintf('Sticker "%s"', $this->faker->word));
-        $product->setDescription($this->faker->paragraph);
-        $product->setShortDescription($this->faker->sentence);
         $product->setVariantSelectionMethod(ProductInterface::VARIANT_SELECTION_MATCH);
 
         $this->addMasterVariant($product);
@@ -165,11 +162,9 @@ class LoadProductsData extends DataFixture
     protected function createMug($i)
     {
         $product = $this->createProduct();
+        $product->addTranslation($this->createProductTranslation('Mug "%s"', $i));
 
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
-        $product->setName(sprintf('Mug "%s"', $this->faker->word));
-        $product->setDescription($this->faker->paragraph);
-        $product->setShortDescription($this->faker->sentence);
 
         $this->addMasterVariant($product);
 
@@ -197,14 +192,12 @@ class LoadProductsData extends DataFixture
     protected function createBook($i)
     {
         $product = $this->createProduct();
-
         $author = $this->faker->name;
+        $product->addTranslation($this->createProductTranslation('Book "%s"', $i));
+
         $isbn = $this->getUniqueISBN();
 
         $product->setTaxCategory($this->getTaxCategory('Taxable goods'));
-        $product->setName(sprintf('Book "%s" by "%s"', ucfirst($this->faker->word), $author));
-        $product->setDescription($this->faker->paragraph);
-        $product->setShortDescription($this->faker->sentence);
 
         $this->addMasterVariant($product, $isbn);
 
@@ -348,6 +341,24 @@ class LoadProductsData extends DataFixture
     protected function createProduct()
     {
         return $this->getProductRepository()->createNew();
+    }
+
+    /**
+     * Create a translation in Default Language
+     * @param string $trans
+     * @param int    $i
+     *
+     * @return \Sylius\Candibambu\ProductBundle\Entity\ProductTranslation
+     */
+    protected function createProductTranslation($trans, $i)
+    {
+        $object = clone $this->container->get('sylius.entity.product_translation');
+        $object->setLocale($this->container->getParameter('sylius.locale'));
+        $object->setName(sprintf($trans, $this->faker->word) . $i);
+        $object->setDescription($this->faker->paragraph);
+        $object->setShortDescription($this->faker->sentence);
+
+        return $object;
     }
 
     /**

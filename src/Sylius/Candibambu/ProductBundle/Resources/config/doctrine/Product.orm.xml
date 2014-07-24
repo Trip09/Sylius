@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!--
+
+ This file is part of the Sylius package.
+
+ (c) Paweł Jędrzejewski
+
+ For the full copyright and license information, please view the LICENSE
+ file that was distributed with this source code.
+
+-->
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping">
+
+    <entity name="Sylius\Candibambu\ProductBundle\Entity\Product" table="candibambu_product">
+        <attribute-overrides>
+            <attribute-override name="name">
+                <field column="name" type="string" nullable="true" />
+            </attribute-override>
+            <attribute-override name="slug">
+                <field column="slug" type="string" nullable="true" >
+                </field>
+            </attribute-override>
+            <attribute-override name="description">
+                <field column="description" type="text" nullable="true" />
+            </attribute-override>
+            <attribute-override name="shortDescription">
+                <field column="short_description" type="string" nullable="true" />
+            </attribute-override>
+        </attribute-overrides>
+    </entity>
+</doctrine-mapping>

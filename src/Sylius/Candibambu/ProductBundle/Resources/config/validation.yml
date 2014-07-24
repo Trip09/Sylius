@@ -1,0 +1,4 @@
+Sylius\Candibambu\ProductBundle\Entity\ProductTranslation:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity:
+            fields: [locale, slug]

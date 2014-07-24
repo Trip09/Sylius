@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:gedmo="http://gediminasm.org/schemas/orm/doctrine-extensions-mapping">
+
+    <entity name="Sylius\Candibambu\ProductBundle\Entity\ProductTranslation"
+            repository-class="Sylius\Candibambu\ProductBundle\Doctrine\ORM\ProductTranslation"
+            table="candibambu_product_translation">
+
+        <id name="id" column="id" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="locale" type="string" length="10"/>
+        <field name="slug" type="string">
+            <gedmo:slug fields="name" unique="false" />
+        </field>
+        <field name="name" type="string" />
+        <field name="description" type="text" nullable="true" />
+        <field name="shortDescription" column="short_description" type="string" nullable="true" />
+
+        <indexes>
+            <index columns="translatable_id,locale" name="translatable_id_locale_udx"/>
+        </indexes>
+
+        <unique-constraints>
+            <unique-constraint columns="locale,slug" name="candibambu_product_translation_unique_translation" />
+        </unique-constraints>
+
+        <many-to-one field="product" target-entity="Sylius\Candibambu\ProductBundle\Entity\Product" inversed-by="translations" >
+            <join-column name="translatable_id" referenced-column-name="id" />
+        </many-to-one>
+
+    </entity>
+
+</doctrine-mapping>

@@ -1,0 +1,17 @@
+parameters:
+    sylius.entity.product_translation.class: Sylius\Candibambu\ProductBundle\Entity\ProductTranslation
+    sylius_candibambu.listener.product_translation.class: Sylius\Candibambu\ProductBundle\Listener\UniqueSlug
+
+services:
+    sylius.entity.product_translation:
+        class: "%sylius.entity.product_translation.class%"
+
+    sylius.listener.product_translation.persist:
+        class: "%sylius_candibambu.listener.product_translation.class%"
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }
+
+    sylius.listener.product_translation.update:
+        class: "%sylius_candibambu.listener.product_translation.class%"
+        tags:
+            - { name: doctrine.event_listener, event: preUpdate }

@@ -21,6 +21,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use A2lix\I18nDoctrineBundle\Annotation\I18nDoctrine;
 
 /**
  * Base resource controller for Sylius.
@@ -200,6 +201,7 @@ class ResourceController extends FOSRestController
      * @param Request $request
      *
      * @return RedirectResponse|Response
+     * @I18nDoctrine
      */
     public function updateAction(Request $request)
     {

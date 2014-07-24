@@ -1,0 +1,83 @@
+<?php
+
+namespace Sylius\Candibambu\ProductBundle\Entity;
+
+use Doctrine\Common\Collections\ArrayCollection;
+use Sylius\Component\Core\Model\Product as BaseProduct;
+use Doctrine\Common\Collections\Collection;
+
+/**
+ * Class Product
+ *
+ * @package Candibambu\ProductBundle
+ */
+class Product extends BaseProduct
+{
+    use \A2lix\I18nDoctrineBundle\Doctrine\ORM\Util\Translatable;
+
+    /** @var Collection|Translatable @var Collection */
+    protected $translations;
+
+
+    /**
+     * @inheritdoc
+     */
+    public function __construct()
+    {
+        parent::__construct();
+        $this->translations = new ArrayCollection();
+    }
+
+    public function getSlug()
+    {
+        return (false !== $this->getCurrentTranslation())
+            ? $this->getCurrentTranslation()->getSlug()
+            : '';
+    }
+
+    public function getName()
+    {
+        return (false !== $this->getCurrentTranslation())
+            ? $this->getCurrentTranslation()->getName()
+            : '';
+    }
+    public function getDescription()
+    {
+        return (false !== $this->getCurrentTranslation())
+            ? $this->getCurrentTranslation()->getDescription()
+            : '';
+    }
+
+    /**
+     * Add translations
+     *
+     * @param \Sylius\Candibambu\ProductBundle\Entity\ProductTranslation $translations
+     * @return Product
+     */
+    public function addTranslation(\Sylius\Candibambu\ProductBundle\Entity\ProductTranslation $translations)
+    {
+        $this->translations[] = $translations;
+
+        return $this;
+    }
+
+    /**
+     * Remove translations
+     *
+     * @param \Sylius\Candibambu\ProductBundle\Entity\ProductTranslation $translations
+     */
+    public function removeTranslation(\Sylius\Candibambu\ProductBundle\Entity\ProductTranslation $translations)
+    {
+        $this->translations->removeElement($translations);
+    }
+
+    /**
+     * Get translations
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTranslations()
+    {
+        return $this->translations;
+    }
+}

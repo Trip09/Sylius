@@ -572,3 +572,9 @@ input[type="file"] {
     border-top-color: #333;
     color: #333;
 }
+.multilanguage-form-container input, .multilanguage-form-container textarea {
+    width: 530px;
+}
+.multilanguage-form-container textarea {
+    height: 100px;
+}

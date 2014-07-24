@@ -59,7 +59,9 @@
         "white-october/pagerfanta-bundle":      "1.0.*@dev",
         "winzou/state-machine-bundle":          "~0.1.2",
         "willdurand/hateoas-bundle":            "@stable",
-        "friendsofsymfony/oauth-server-bundle": "dev-master"
+        "friendsofsymfony/oauth-server-bundle": "dev-master",
+        "a2lix/translation-form-bundle":        "dev-master",
+        "a2lix/i18n-doctrine-bundle":           "dev-master"
     },
     "require-dev": {
         "behat/behat":                       "~3.0",
